@@ -1,0 +1,33 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, "Open Sans", "Helveltica Neue", sans-serif;
+    font-size: 18px;
+    max-width: 576px;
+    margin: 0 auto;
+}
+
+p,
+blockquote {
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+
+blockquote {
+    margin: 0 0 26px 0;
+    padding-left: 30px;
+    border-left: 6px solid #1c2023;
+    font-style: italic;
+}
+
+a {
+    display: block;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+    margin: 0 auto;
+    background-color: #1c2023;
+
+}
+
+a.hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
