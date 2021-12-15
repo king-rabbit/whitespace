@@ -1,33 +1,41 @@
+*,
+*::before,
+*::after{
+    box-sizing: inherit
+}
+
 body {
+    box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, "Open Sans", "Helveltica Neue", sans-serif;
+    color: #002244;
     font-size: 18px;
     max-width: 576px;
     margin: 0 auto;
 }
 
-p,
-blockquote {
-    line-height: 24px;
-    margin-bottom: 24px;
+main {
+    max-width: 35rem;
+    margin: 3.75rem auto 0 auto;
 }
 
-blockquote {
-    margin: 0 0 26px 0;
-    padding-left: 30px;
-    border-left: 6px solid #1c2023;
-    font-style: italic;
+h1{
+    margin-bottom: 2.5rem;
 }
 
-a {
-    display: block;
-    width: fit-content;
-    color: white;
-    text-decoration: none;
-    margin: 0 auto;
-    background-color: #1c2023;
-
+p {
+    background-color: white;
+    line-height: 150%;
+    color: inherit;
 }
 
-a.hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+img {
+    max-width: 100px;
+}
+
+ul li > a {
+    color: orangered;
+}
+
+ul li {
+    color: blue;
 }
