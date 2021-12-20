@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>First page -- {{name}}</h1>
+    <p>this is the {{template_name}} introduction page</p>
+
+    <h3> available products</h3>
+
+    {% if company == "Apple" %}
+    <ul>
+        <li>iphone</li>
+        <li>ipad</li>
+    </ul>
+
+    {% elif company == "Microsoft" %}
+    <ul>
+        <li>surface pro</li>
+        <li>surface book</li>
+    </ul>
+
+   {% else %}
+   <p> no {{company}} products available</p>
+    {% endif %}
+
+<ul>
+    {% for planet in planets %}
+        <li>{{planet}}</li>
+    {% endfor %}
+
+</ul>
+
+<ul>
+    {% for user, os in user_os.items() %}
+        <li> {{user}} is a  {{os}}  user</li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
