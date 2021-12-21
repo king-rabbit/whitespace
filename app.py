@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+
 entries = []
 
 class GalileanMoons:
@@ -20,14 +21,13 @@ def home():
         formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
         entries.append((entry_content, formatted_date))
 
-        entries_with_date = [
-            (entry[0], entry[1], datetime.datetime.strptime(entry[1], "%Y-%m-%d").strftime("%b %d"))
+    entries_with_date = [
+            ( entry[0], entry[1], datetime.datetime.strptime(entry[1], "%Y-%m-%d").strftime("%b %d") )
             for entry in entries
-        ]
+            ]
 
-        
-    
     return render_template("index.html", entries=entries_with_date)
+
 
 
 @app.route("/first_page")
@@ -43,6 +43,7 @@ def hello_world():
 
     return render_template("first_page.html",  name="bob", template_name='python', company='Microsoft', planets=planets, user_os=user_os) #html파일을 jinja 템플릿으로 넘긴다
 
+
 @app.route("/second")
 def secont_page():
     movies = [
@@ -56,3 +57,7 @@ def secont_page():
 
     kwargs = { "movies": movies, "moons" :moons}
     return render_template("second_page.html", **kwargs)
+
+
+if __name__ == '__main__':
+    app.run(host="127.0.0.1", port='8000')
