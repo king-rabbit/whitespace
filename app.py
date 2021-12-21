@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from pymongo import MongoClient
 
 app = Flask(__name__)
-client = MongoClient("mongodb+srv://sykim:1234@whitespace.2rxid.mongodb.net/test?authSource=admin&replicaSet=atlas-1x7et7-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true")
+client = MongoClient("mongodb+srv://sykim:1234@whitespace.2rxid.mongodb.net/test")
 
 app.db = client.whitespace
 
@@ -63,5 +63,7 @@ def secont_page():
     return render_template("second_page.html", **kwargs)
 
 
+'''
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port='8000')
+    '''
