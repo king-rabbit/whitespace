@@ -29,7 +29,7 @@ def create_app():
         if request.method == "POST":
             entry_content = request.form.get("content")
             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
-            app.db.posts.insert({"content":entry_content, "date":formatted_date})
+            app.db.posts.insert_one({"content":entry_content, "date":formatted_date})
 
         entries_with_date = [
                 ( entry['content'], entry['date'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
