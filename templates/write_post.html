@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Admin</h1>
+
+    <section>
+      <h2>New post</h2>
+
+      <form class="form" action="/write_post" method="POST">
+          <p class="form__input_title">
+            <label for="entry_title">Title</label>
+            <textarea name="title" id="title" class="form__title"></textarea>
+          </p>
+          <p class="form__input_content">
+            <label for="entry_content">Content</label>
+            <textarea name="content" id="content" class="form__content"></textarea>
+          </p>
+          <button type="submit" class="form__submit">Add</button>
+      </form>
+      </section>
+
+
+
+</body>
+</html>

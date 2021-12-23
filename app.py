@@ -15,24 +15,12 @@ def create_app():
 
     entries = []
 
-    class GalileanMoons:
-        def __init__(self, first, second, third, fourth):
-            self.first = first
-            self.second = second
-            self.third = third
-            self.fouth = fourth
-
 
     @app.route("/", methods=["GET", "POST"])
     def home():
 
-        if request.method == "POST":
-            entry_content = request.form.get("content")
-            formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
-            app.db.posts.insert_one({"content":entry_content, "date":formatted_date})
-
         entries_with_date = [
-                ( entry['content'], entry['date'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
+                ( entry['title'], entry['content'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
                 for entry in app.db.posts.find({},)
                 ]
 
@@ -40,33 +28,36 @@ def create_app():
 
 
 
-    @app.route("/first_page")
-    def hello_world():
+    @app.route("/write_post", methods=['GET', 'POST'])
+    def write_post():
 
-        planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neputune"]
+        if request.method == "POST":
+            entry_title = request.form.get("title")
+            entry_content = request.form.get("content")
+            formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
 
-        user_os = {
-            "bob smith": "mac",
-            "anne": "linus",
-            "adam" : "window"
-        }
+            print(entry_title)
 
-        return render_template("first_page.html",  name="bob", template_name='python', company='Microsoft', planets=planets, user_os=user_os) #html파일을 jinja 템플릿으로 넘긴다
+            app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
+            
+
+        return render_template("write_post.html") #html파일을 jinja 템플릿으로 넘긴다
 
 
-    @app.route("/second")
-    def secont_page():
-        movies = [
-            "west side story", 
-            "marvel series",
-            "simpsons"
+    @app.route("/post/<string:post_title>")
+    def individual_post(post_title):
+        print(post_title)
+        result = app.db.posts.find( {"title":post_title } )
+        for r in result:
+            print(r)
+
+        indv_post = [ 
+            (post['title'] , post['content'], datetime.datetime.strptime(post['date'], "%Y-%m-%d") ) 
+             for post in app.db.posts.find( {"title":post_title } )
         ]
-
-        moons = GalileanMoons("Io", "Europa", "Ganymded", "Gallisto"
-        )
-
-        kwargs = { "movies": movies, "moons" :moons}
-        return render_template("second_page.html", **kwargs)
+        print(indv_post)
+       
+        return render_template("post.html", post_data=indv_post)
 
     
     return app
