@@ -34,6 +34,7 @@ def create_app():
         if request.method == "POST":
             entry_title = request.form.get("title")
             entry_content = request.form.get("content")
+            #entry_content = entry_content.replace('\r\n' , "<br>")
             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
 
             print(entry_title)
@@ -52,7 +53,7 @@ def create_app():
             print(r)
 
         indv_post = [ 
-            (post['title'] , post['content'], datetime.datetime.strptime(post['date'], "%Y-%m-%d") ) 
+            (post['title'] , post['content'], datetime.datetime.strptime(post['date'], "%Y-%m-%d").strftime("%Y %b %d") ) 
              for post in app.db.posts.find( {"title":post_title } )
         ]
         print(indv_post)

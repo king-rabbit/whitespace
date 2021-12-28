@@ -14,7 +14,10 @@ body {
 h1 {
     box-sizing: border-box;
     font-size: 24px;
+    text-align: center;
 }
+
+/* navbar */
 
 .navbar {
     max-width: 640px;
@@ -51,6 +54,8 @@ h1 {
     text-decoration: none;
     color: inherit;
 }
+
+/* main */
 
 .main {
     max-width: 450px;
@@ -115,6 +120,15 @@ h1 {
     font-size: 16px;
     line-height: 150%;
 }
+
+pre {
+    white-space: normal;
+    margin: 10px auto;
+}
+
+
+
+/*footer*/
 .footer {
     background-color: #323f43;
     padding: 40px 0;

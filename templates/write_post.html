@@ -8,7 +8,7 @@
     
     <title>Whitespace</title>
 
-    <link rel='stylesheet' href='../static/css/style.css'/>
+    <link rel='stylesheet' href='../static/css/admin_style.css'/>
 </head>
 <body>
 
@@ -22,23 +22,43 @@
        </ul>
 </header>
 
-    <section>
-      <h2>New post</h2>
+    <main>
+      <section>
+        <h2>New post</h2>
 
-      <form class="form" action="/write_post" method="POST">
-          <p class="form__input_title">
-            <label for="entry_title">Title</label>
-            <textarea name="title" id="title" class="form__title"></textarea>
-          </p>
-          <p class="form__input_content">
-            <label for="entry_content">Content</label>
-            <textarea name="content" id="content" class="form__content"></textarea>
-          </p>
-          <button type="submit" class="form__submit">Add</button>
-      </form>
+        <form class="form" action="/write_post" method="POST">
+            <p class="form__input_title">
+              <label class="entry_title">Title</label>
+              <textarea required name="title" id="title" class="form__title"></textarea>
+            </p>
+            <p class="form__input_content">
+              <label class="entry_content">Content</label>
+              <textarea required  wrap="hard" name="content" id="content" class="form__content"></textarea>
+            </p>
+            <button type="submit" class="form__submit">Add</button>
+        </form>
       </section>
+    </main> 
 
-
+    <footer class="footer">
+      <div class="footer__content">
+        <section class="left">
+          <a class="footer__item">Made by SY KIM</a>
+          <a class="footer__item">other projects</a>
+        </section>
+        <section class="right">
+          <div class="footer__column">
+            <a class="footer__item">Recent</a>
+            <a class="footer__item">Calender</a>
+          </div>
+          <div class="footer__column">
+            <a class="footer__item" href="#">About</a>
+            <a class="footer__item">How this was made</a>
+          </div>
+        </section>
+      </div>
+    </footer>
+  
 
 </body>
 </html>
