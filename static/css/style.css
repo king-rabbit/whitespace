@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@600&family=Nanum+Myeongjo&display=swap');
+
 html {
-    font-family: Lato, sans-serif; 
+  font-family: 'Nanum Myeongjo', serif; 
 }
 
 *, *::after, *::before{ 
@@ -8,13 +10,16 @@ html {
 
 body {
     box-sizing: border-box;
-    margin: 0l
+    margin: 0;
 }
 
 h1 {
     box-sizing: border-box;
-    font-size: 24px;
+    font-size: 40px;
+    width: 100%;
     text-align: center;
+    font-family: 'Brygada 1918', serif;
+    margin: 0px;
 }
 
 /* navbar */
@@ -23,7 +28,7 @@ h1 {
     max-width: 640px;
     margin: 50px auto;
     padding: 0 20px;
-    display: flex;
+    display: block;
     flex-direction: row;
     justify-content: space-between;
     font-size: 24px;
@@ -34,20 +39,16 @@ h1 {
     align-items: center;
 }
 
-.navbar__logo {
-    margin-right: 30px;
-}
-
 .navbar__navigation{
     list-style:none;
-    flex-direction: row;
+    flex-direction: column;
     padding: 0;
-    display: flex;
-    color: #5c6b70;
+    display:block; 
+    color: #424c4f;
 }
 
 .navbar__navigation-item{
-    margin-left: 50px;
+    margin-left: 10px;
 }
 
 .navbar__link{
@@ -101,6 +102,24 @@ h1 {
 
 .form__submit:hover {
     background-color: #18c1e1;
+}
+
+
+h2 {
+    box-sizing: border-box;
+    font-size: 25px;
+    width: 100%;
+    text-align: left;
+    font-family: 'Brygada 1918', serif;
+    margin: 0px;
+}
+
+
+h3 {
+    box-sizing: border-box;
+    font-size: 20px;
+    width: 100%;
+    text-align: left;
 }
 
 .entry {

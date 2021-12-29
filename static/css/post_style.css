@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@600&family=Nanum+Myeongjo&display=swap');
+
 html {
-  font-family: Lato, sans-serif; 
+  font-family: 'Nanum Myeongjo', serif; 
 }
 
 *, *::after, *::before{
@@ -11,12 +13,13 @@ body {
   margin: 0l
 }
 
-
 h1 {
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 40px;
   text-align: center;
+  font-family: 'Brygada 1918', serif;
 }
+
 
 /* navbar */
 
@@ -74,9 +77,11 @@ h1 {
 }
 
 .post__content {
-  font-size: 12px;
+  font-size: 18px;
+  font-family: 'Nanum Myeongjo', serif;
+  letter-spacing: 0px;
+  line-height: 13px;
 }
-
 
 
 /*footer*/

@@ -49,16 +49,16 @@ def create_app():
     def individual_post(post_title):
         print(post_title)
         result = app.db.posts.find( {"title":post_title } )
-        for r in result:
-            print(r)
 
-        indv_post = [ 
-            (post['title'] , post['content'], datetime.datetime.strptime(post['date'], "%Y-%m-%d").strftime("%Y %b %d") ) 
+        for post in app.db.posts.find( {"title":post_title }):
+             post_content = post['content'].split('\r\n')
+
+        post_meta = [ 
+            (post['title'], datetime.datetime.strptime(post['date'], "%Y-%m-%d").strftime("%Y %b %d") ) 
              for post in app.db.posts.find( {"title":post_title } )
         ]
-        print(indv_post)
        
-        return render_template("post.html", post_data=indv_post)
+        return render_template("post.html", post_data=post_meta, post_content=post_content)
 
     
     return app

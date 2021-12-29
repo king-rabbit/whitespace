@@ -24,12 +24,15 @@
     </header>
     
     <main>
-        <article class="post">
+      <article class="post">
         {% for post in post_data %}
             <h1 class="post__title">{{post[0]}}</h1>
-            <p class="post__date">{{post[2]}}</p>
-            <p class="post__content"><pre>{{post[1]}}</pre></p>
-            {% endfor %}
+            <p class="post__date">{{post[1]}}</p>
+          {% endfor %}
+
+          {% for text in post_content %}
+          <p class="post__content">{{text}}</p>
+          {% endfor %}
     </article>
     </main> 
     
