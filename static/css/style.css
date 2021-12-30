@@ -9,6 +9,7 @@ html {
     box-sizing: border-box;
 }
 
+
 body {
     box-sizing: border-box;
     margin: 0;
@@ -27,18 +28,22 @@ h1 {
 /* navbar */
 
 .navbar {
-    max-width: 640px;
+    position: fixed;
+    width: 100%;
+    z-index:1;
     margin: 50px auto;
     padding: 0 20px;
-    display: block;
+    top:0px;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-size: 24px;
 }
 
 .navbar__brand {
-    display: flex;
-    align-items: center;
+    width: 680px;
+    display: block;
+    margin: 0 auto;
 }
 
 .navbar__navigation{
@@ -69,9 +74,13 @@ h1 {
 /* main */
 
 .main {
+    flex: 1 1 100%;
     max-width: 640px;
     margin: 0 auto;
-    padding: 0 20px;
+    display:flex; 
+    flex-flow: row wrap;
+    margin-top: 200px;
+    flex-direction: row;
 }
 
 .form {
@@ -119,6 +128,7 @@ h2 {
     box-sizing: border-box;
     font-size: 25px;
     width: 100%;
+    display:block;
     text-align: left;
     font-family: 'Brygada 1918', serif;
     margin: 0px;
