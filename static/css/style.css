@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@600&family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pushster&family=Simonetta:wght@400;900&display=swap');
 
 html {
   font-family: 'Nanum Myeongjo', serif; 
@@ -17,9 +18,10 @@ h1 {
     box-sizing: border-box;
     font-size: 40px;
     width: 100%;
-    text-align: center;
-    font-family: 'Brygada 1918', serif;
+    text-align: left;
+    font-family: 'Pushster', cursive;
     margin: 0px;
+    color: #041C32;
 }
 
 /* navbar */
@@ -45,10 +47,18 @@ h1 {
     padding: 0;
     display:block; 
     color: #424c4f;
+    margin: 0px;
+    height: 50px;
+    font-family: 'Simonetta', cursive;
+    font-size: 20px;
 }
 
+.navbar__navigation-item:nth-of-type(1){
+    float: left;
+}
 .navbar__navigation-item{
-    margin-left: 10px;
+    margin-left: 20px;
+    float: left;
 }
 
 .navbar__link{
@@ -59,7 +69,7 @@ h1 {
 /* main */
 
 .main {
-    max-width: 450px;
+    max-width: 640px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -112,13 +122,14 @@ h2 {
     text-align: left;
     font-family: 'Brygada 1918', serif;
     margin: 0px;
+    font-family: 'Simonetta', cursive;
 }
 
 
 h3 {
     box-sizing: border-box;
-    font-size: 20px;
     width: 100%;
+    margin-left:10px;
     text-align: left;
 }
 
@@ -128,11 +139,18 @@ h3 {
 
 .entry__title {
     display: inline;
-    font-size: 16px;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color:black;
 }
 
 .entry__date {
+    margin-left: 20px;
     color: #5c6b70;
+    font-size: 12px;
 }
 
 .entry__content {

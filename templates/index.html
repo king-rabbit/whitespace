@@ -20,8 +20,10 @@
         </div>
         <hr style="width:100%;text-align:left;margin-left:0">
         <ul class="navbar__navigation">
-          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Art</a></li>
-          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Essay</a></li>
+          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Films</a></li>
+          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Books</a></li>
+          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Music</a></li>
+          <li class="navbar__navigation-item"><a href="#" class="navbar__link">Memos</a></li>
         </ul>
       </header>
 
@@ -35,9 +37,6 @@
                <h3 class="entry__title"><a href="{{url_for('individual_post', post_title=entry[0])}}">{{entry[0]}}</a></h3>
                <time class="entry__date" datetime="{{ entry[2] }}"> {{ entry[2] }}</time>
               </div>
-             <p class="entry__content">
-               {{ entry[1] }}
-             </p>
            </article>
            {% endfor %}
           </section>
