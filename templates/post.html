@@ -1,29 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="sykim"/>
-
-    <title>Whitespace</title>
-
-    <link rel='stylesheet' href='../static/css/post_style.css'/>
-</head>
-<body>
-
-    <header class="navbar">
-        <div class="navbar__brand">
-            <h1>Whitespace</h1>
-           </div>
-           <ul class="navbar__navigation">
-             <li class="navbar__navigation-item"><a href="#" class="navbar__link">Art</a></li>
-             <li class="navbar__navigation-item"><a href="#" class="navbar__link">Essay</a></li>
-           </ul>
-
-    </header>
+{% extends 'base.html' %}
+{% block content %}
     
-    <main>
+    <main class=main>
       <article class="post">
         {% for post in post_data %}
             <h1 class="post__title">{{post[0]}}</h1>
@@ -36,27 +14,4 @@
     </article>
     </main> 
     
-    <footer class="footer">
-        <div class="footer__content">
-          <section class="left">
-            <a class="footer__item">Made by SY KIM</a>
-            <a class="footer__item">other projects</a>
-          </section>
-          <section class="right">
-            <div class="footer__column">
-              <a class="footer__item">Recent</a>
-              <a class="footer__item">Calender</a>
-            </div>
-            <div class="footer__column">
-              <a class="footer__item" href="#">About</a>
-              <a class="footer__item">How this was made</a>
-            </div>
-          </section>
-        </div>
-      </footer>
-    
-    </body>
-
-
-</body>
-</html>
+{% endblock %}

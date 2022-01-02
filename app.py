@@ -8,17 +8,17 @@ load_dotenv()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__) 
     client = MongoClient(os.environ.get("MONGODB_URI"))
 
     app.db = client.whitespace
-
+  
     entries = []
 
 
     @app.route("/", methods=["GET", "POST"])
     def home():
-
+        
         entries_with_date = [
                 ( entry['title'], entry['content'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
                 for entry in app.db.posts.find({},)
@@ -65,5 +65,6 @@ def create_app():
 
 '''
 if __name__ == '__main__':
+    app = create_app()
     app.run(host="127.0.0.1", port='8000')
-''' 
+'''
