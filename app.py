@@ -33,16 +33,16 @@ def create_app():
 
         if request.method == "POST":
             entry_title = request.form.get("title")
+            print(entry_title)
             entry_content = request.form.get("content")
+            print(entry_content)
             #entry_content = entry_content.replace('\r\n' , "<br>")
             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
-
-            print(entry_title)
 
             app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
             
 
-        return render_template("write_post.html") #html파일을 jinja 템플릿으로 넘긴다
+        return render_template("write_post.html") 
 
 
     @app.route("/post/<string:post_title>")

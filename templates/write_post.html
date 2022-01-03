@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="sykim"/>
-    
     <title>Whitespace - Admin</title>
-
     <link rel='stylesheet' href='../static/css/admin_style.css'/>
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
 </head>
 <body>
 
@@ -27,12 +26,28 @@
               <label class="entry_title">Title</label>
               <textarea required name="title" id="title" class="form__title"></textarea>
             </p>
+
             <p class="form__input_content">
               <label class="entry_content">Content</label>
-              <textarea required name="content" id="content" class="form__content"></textarea>
+              <textarea name="content" id="content" class="form__content"></textarea>
+
+            <script>
+              ClassicEditor
+                  .create( document.querySelector( '#content' ), {
+                    language: {ui:'ko', content:'ko'},
+                    filebrowserUploadUrl: '/img'
+                  } )
+                  .catch( error => {
+                      console.error( error );
+                  } );
+          </script>
+
             </p>
-            <button type="submit" class="form__submit">Add</button>
+
+          <button type="submit" class="form__submit">Add</button>
+
         </form>
+
 
 
       </section>
