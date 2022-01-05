@@ -150,6 +150,27 @@ h2 {
 }
 
 
+/*post_lists*/
+.posts {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.post_list {
+  list-style: none;
+  flex-direction: row;
+  padding: 0px 20px;
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.post_list_item {
+  margin-left: 20px;
+  float: left;
+}
+
+
 
 /*footer*/
 .footer {

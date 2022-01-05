@@ -28,7 +28,7 @@ def create_app():
 
 
 
-    @app.route("/write_post", methods=['GET', 'POST'])
+    @app.route("/admin/write_post", methods=['GET', 'POST'])
     def write_post():
 
         if request.method == "POST":
@@ -45,9 +45,9 @@ def create_app():
         return render_template("write_post.html") 
 
 
-    @app.route("/post/<string:post_title>")
+    @app.route("/post/<string:post_title>",  methods=['GET', 'POST'])
     def individual_post(post_title):
-        print(post_title)
+
         result = app.db.posts.find( {"title":post_title } )
 
         for post in app.db.posts.find( {"title":post_title }):
@@ -59,6 +59,33 @@ def create_app():
         ]
        
         return render_template("post.html", post_data=post_meta, post_content=post_content)
+
+        
+    @app.route("/admin/posts_list", methods = ['GET', 'POST'])
+    def admin_posts_list():
+
+        posts = [
+                ( post['title'], datetime.datetime.strptime(post['date'], "%Y-%m-%d").strftime("%b %d") )
+                for post in app.db.posts.find({},)
+                ]
+
+        return render_template("posts_list.html", posts=posts)
+
+    @app.route("/admin/post/<string:post_title>",  methods=['GET', 'POST'])
+    def admin_post_edit(post_title):
+
+        result = app.db.posts.find( {"title":post_title } )
+
+        for post in app.db.posts.find( {"title":post_title }):
+             post_content = post['content'].split('\r\n')
+
+        post_meta = [ 
+            (post['title'], datetime.datetime.strptime(post['date'], "%Y-%m-%d").strftime("%Y %b %d") ) 
+             for post in app.db.posts.find( {"title":post_title } )
+        ]
+       
+        return render_template("post_edit.html", post_data=post_meta, post_content=post_content)
+
 
     
     return app
