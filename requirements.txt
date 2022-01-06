@@ -6,3 +6,4 @@ PyJWT==1.4.2
 pymongo[srv]==4.0.1
 gunicorn
 python-dotenv==0.19.2
+flask-ckeditor==0.4.6

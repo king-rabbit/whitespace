@@ -1,19 +1,29 @@
 import os
+import uuid
 import datetime
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory, url_for
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from flask_ckeditor import CKEditor
+from flask_ckeditor import upload_success, upload_fail
 
 load_dotenv()
+ckeditor = CKEditor()
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 
 def create_app():
     app = Flask(__name__) 
     client = MongoClient(os.environ.get("MONGODB_URI"))
-
     app.db = client.whitespace
-  
     entries = []
+
+    app.config['CKEDITOR_PKG_TYPE'] = 'basic'
+    app.config['CKEDITOR_HEIGHT'] = 400
+    app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'  # this value can be endpoint or url
+    app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads')
+    ckeditor.init_app(app)
 
 
     @app.route("/", methods=["GET", "POST"])
@@ -26,6 +36,24 @@ def create_app():
 
         return render_template("index.html", entries=entries_with_date)
 
+    
+    @app.route('/files/<path:filename>')
+    def uploaded_files(filename):
+        path = app.config['UPLOADED_PATH']
+        return send_from_directory(path, filename)
+
+    @app.route('/upload', methods=['POST'])
+    def upload():
+        f = request.files.get('upload')
+        extension = f.filename.split('.')[-1].lower()
+        if extension not in ['jpg', 'gif', 'png', 'jpeg']:
+            return upload_fail(message='Image only!')
+        unique_filename = str(uuid.uuid4())
+        f.filename = unique_filename + '.' + extension
+        f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+        url = url_for('uploaded_files', filename=f.filename)
+        return upload_success(url, filename=f.filename)  # return upload_success call
+
 
 
     @app.route("/admin/write_post", methods=['GET', 'POST'])
@@ -33,9 +61,9 @@ def create_app():
 
         if request.method == "POST":
             entry_title = request.form.get("title")
-            print(entry_title)
-            entry_content = request.form.get("content")
-            print(entry_content)
+            #entry_content = request.form.get("content")
+            entry_content = request.form.get('ckeditor')
+            
             #entry_content = entry_content.replace('\r\n' , "<br>")
             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
 
