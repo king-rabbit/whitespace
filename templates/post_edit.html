@@ -22,7 +22,7 @@
         <h2>New post</h2>
 
         <form class="form" action="/admin/posts_list" method="POST">
-
+          {{ form.csrf_token() }}
           {% for post in post_data %}
             <p class="form__input_title">
               <label class="entry_title">Title</label>
@@ -35,22 +35,14 @@
               <label class="entry_content">Content</label>
               <textarea name="content" id="content" class="form__content">{{text}}</textarea>
           {% endfor %}
-            <script>
-              ClassicEditor
-                  .create( document.querySelector( '#content' ), {
-                    language: {ui:'ko', content:'ko'},
-                    filebrowserUploadUrl: '/img'
-                  } )
-                  .catch( error => {
-                      console.error( error );
-                  } );
-          </script>
 
             </p>
 
-          <button type="submit" class="form__submit">Add</button>
+            {{ form.submit }}
 
         </form>
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name='body') }}
 
 
 

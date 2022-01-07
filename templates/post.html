@@ -9,7 +9,7 @@
           {% endfor %}
 
           {% for text in post_content %}
-          <p class="post__content">{{text}}</p>
+          <p class="post__content">{{text | safe}}</p>
           {% endfor %}
     </article>
     </main> 

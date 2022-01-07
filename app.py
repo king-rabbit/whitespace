@@ -2,10 +2,13 @@ import os
 import uuid
 import datetime
 from flask import Flask, render_template, request, send_from_directory, url_for
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from flask_ckeditor import CKEditor
-from flask_ckeditor import upload_success, upload_fail
+from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
+from flask_wtf import CSRFProtect  
 
 load_dotenv()
 ckeditor = CKEditor()
@@ -19,11 +22,22 @@ def create_app():
     app.db = client.whitespace
     entries = []
 
-    app.config['CKEDITOR_PKG_TYPE'] = 'basic'
+    app.config['CKEDITOR_SERVE_LOCAL'] = True
     app.config['CKEDITOR_HEIGHT'] = 400
     app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'  # this value can be endpoint or url
     app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads')
+    app.config['CKEDITOR_ENABLE_CSRF'] = True
+
+    app.secret_key = 'secret string'
+
     ckeditor.init_app(app)
+    csrf = CSRFProtect(app) 
+
+
+    class PostForm(FlaskForm):
+        title = StringField('Title')
+        body = CKEditorField('Body', validators=[DataRequired()])
+        submit = SubmitField()
 
 
     @app.route("/", methods=["GET", "POST"])
@@ -36,6 +50,25 @@ def create_app():
 
         return render_template("index.html", entries=entries_with_date)
 
+
+    @app.route("/admin/write_post", methods=['GET', 'POST'])
+    def write_post():
+        form = PostForm()
+        if form.validate_on_submit():
+             entry_title = form.title.data
+             entry_content = form.body.data
+            #entry_title = request.form.get("title")
+            #entry_content = request.form.get("content")
+            #entry_content = request.form.get('ckeditor')
+            #entry_content = entry_content.replace('\r\n' , "<br>")
+             formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
+
+             app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
+             
+
+        return render_template("write_post.html", form=form) 
+
+    
     
     @app.route('/files/<path:filename>')
     def uploaded_files(filename):
@@ -53,24 +86,6 @@ def create_app():
         f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
         url = url_for('uploaded_files', filename=f.filename)
         return upload_success(url, filename=f.filename)  # return upload_success call
-
-
-
-    @app.route("/admin/write_post", methods=['GET', 'POST'])
-    def write_post():
-
-        if request.method == "POST":
-            entry_title = request.form.get("title")
-            #entry_content = request.form.get("content")
-            entry_content = request.form.get('ckeditor')
-            
-            #entry_content = entry_content.replace('\r\n' , "<br>")
-            formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
-
-            app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
-            
-
-        return render_template("write_post.html") 
 
 
     @app.route("/post/<string:post_title>",  methods=['GET', 'POST'])
