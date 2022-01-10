@@ -9,6 +9,8 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 from flask_wtf import CSRFProtect  
+from flask_admin import Admin
+from flask_admin.contrib.pymongo import ModelView, filters
 
 load_dotenv()
 ckeditor = CKEditor()
@@ -39,6 +41,16 @@ def create_app():
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField()
 
+    class PostAdmin(ModelView):
+        column_list = ('title', 'body', 'submit')
+        form=PostForm
+        #form_overrides = dict(text=CKEditorField)
+        create_template = 'admin/edit.html'
+        edit_template = 'admin/edit.html'
+
+    admin = Admin(app, name='Flask-CKEditor demo')
+    admin.add_view(PostAdmin(app.db, 'Post'))
+
 
     @app.route("/", methods=["GET", "POST"])
     def home():
@@ -57,10 +69,6 @@ def create_app():
         if form.validate_on_submit():
              entry_title = form.title.data
              entry_content = form.body.data
-            #entry_title = request.form.get("title")
-            #entry_content = request.form.get("content")
-            #entry_content = request.form.get('ckeditor')
-            #entry_content = entry_content.replace('\r\n' , "<br>")
              formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
 
              app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
@@ -116,7 +124,7 @@ def create_app():
 
     @app.route("/admin/post/<string:post_title>",  methods=['GET', 'POST'])
     def admin_post_edit(post_title):
-
+            
         result = app.db.posts.find( {"title":post_title } )
 
         for post in app.db.posts.find( {"title":post_title }):
@@ -129,7 +137,9 @@ def create_app():
        
         return render_template("post_edit.html", post_data=post_meta, post_content=post_content)
 
-
+    @app.route('/flask_admin')
+    def index():
+        return '<a href="/admin/">Go to Admin!</a>'
     
     return app
 
