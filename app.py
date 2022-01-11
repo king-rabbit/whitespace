@@ -3,7 +3,7 @@ import uuid
 import datetime
 from flask import Flask, render_template, request, send_from_directory, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, form, fields
 from wtforms.validators import DataRequired
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -40,16 +40,24 @@ def create_app():
         title = StringField('Title')
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField()
+        
+        
+    class Post(FlaskForm):
+        title = StringField('Title')
+        content = CKEditorField('Body', validators=[DataRequired()])
 
+        
     class PostAdmin(ModelView):
-        column_list = ('title', 'body', 'submit')
-        form=PostForm
-        #form_overrides = dict(text=CKEditorField)
-        create_template = 'admin/edit.html'
-        edit_template = 'admin/edit.html'
+        column_list = ('title', 'content')
+        column_sortable_list = ('title', 'content')
+        column_searchable_list = ('title', 'content')
+        form = Post
+        create_template = 'edit.html'
+        edit_template = 'edit.html'
+
 
     admin = Admin(app, name='Flask-CKEditor demo')
-    admin.add_view(PostAdmin(app.db, 'Post'))
+    admin.add_view(PostAdmin(app.db.posts, 'Post!'))
 
 
     @app.route("/", methods=["GET", "POST"])
