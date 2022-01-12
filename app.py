@@ -2,15 +2,14 @@ import os
 import uuid
 import datetime
 from flask import Flask, render_template, request, send_from_directory, url_for
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, form, fields
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField, DateField
 from wtforms.validators import DataRequired
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
-from flask_wtf import CSRFProtect  
 from flask_admin import Admin
-from flask_admin.contrib.pymongo import ModelView, filters
+from flask_admin.contrib.pymongo import ModelView
 
 load_dotenv()
 ckeditor = CKEditor()
@@ -45,12 +44,15 @@ def create_app():
     class Post(FlaskForm):
         title = StringField('Title')
         content = CKEditorField('Body', validators=[DataRequired()])
+        date = StringField('date', default=datetime.datetime.today().strftime("%Y-%m-%d"))      
+        
+        
 
         
     class PostAdmin(ModelView):
-        column_list = ('title', 'content')
-        column_sortable_list = ('title', 'content')
-        column_searchable_list = ('title', 'content')
+        column_list = ('title', 'content', 'date')
+        column_sortable_list = ('title', 'content', 'date')
+        column_searchable_list = ('title', 'content', 'date')
         form = Post
         create_template = 'edit.html'
         edit_template = 'edit.html'
