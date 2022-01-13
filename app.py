@@ -1,9 +1,10 @@
 import os
 import uuid
 import datetime
+import collections
 from flask import Flask, render_template, request, send_from_directory, url_for
 from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField, DateField
+from wtforms import StringField, SubmitField, DateField, SelectField, Form
 from wtforms.validators import DataRequired
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -43,16 +44,19 @@ def create_app():
         
     class Post(FlaskForm):
         title = StringField('Title')
-        content = CKEditorField('Body', validators=[DataRequired()])
         date = StringField('date', default=datetime.datetime.today().strftime("%Y-%m-%d"))      
-        
+
+        categories = ['Films', 'Books', 'Music', 'Memos']
+        category = SelectField(label='State', choices=categories)
+
+        content = CKEditorField('Body', validators=[DataRequired()])
         
 
         
     class PostAdmin(ModelView):
-        column_list = ('title', 'content', 'date')
-        column_sortable_list = ('title', 'content', 'date')
-        column_searchable_list = ('title', 'content', 'date')
+        column_list = ('title', 'date', 'category', 'content')
+        column_sortable_list = ('title', 'date', 'category','content')
+        column_searchable_list = ('title', 'date', 'category','content')
         form = Post
         create_template = 'edit.html'
         edit_template = 'edit.html'
