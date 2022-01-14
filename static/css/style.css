@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Brygada+1918:wght@600&family=Nanum+Myeongjo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pushster&family=Simonetta:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Noto+Sans+KR&display=swap');
 
 html {
-  font-family: 'Nanum Myeongjo', serif; 
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 *, *::after, *::before{ 
@@ -18,11 +17,11 @@ body {
 
 h1 {
     box-sizing: border-box;
-    font-size: 30px;
+    font-size: 25px;
     width: fit-content;
     float: left;
     text-align: left;
-    font-family: 'Pushster', cursive;
+    font-family: 'Montserrat', sans-serif;
     margin: 0px;
     color: #041C32;
 }
@@ -44,9 +43,9 @@ h1 {
 }
 
 .navbar__brand {
-    width: 640px;
+    width: 1200px;
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .navbar__navigation{
@@ -57,15 +56,15 @@ h1 {
     color: #424c4f;
     margin:0px;
     height: 45px;
-    margin-top: 18px;
-    font-family: 'Simonetta', cursive;
-    font-size: 20px;
+    font-family:'Montserrat', sans-serif;
+    font-size: 16px;
 }
 
 .navbar__navigation-item:nth-of-type(1){
     float: right;
 }
 .navbar__navigation-item{
+    margin-top: 10px;
     margin-left: 20px;
     float: right;
 }
@@ -79,7 +78,7 @@ h1 {
 
 .main {
     flex: 1 1 100%;
-    max-width: 640px;
+    max-width: 1100px;
     margin: 0 auto;
     display:flex; 
     flex-flow: row wrap;
@@ -153,12 +152,11 @@ h1 {
 
 h2 {
     box-sizing: border-box;
-    font-size: 25px;
+    font-size: 16px;
     width: 100%;
     display:block;
     text-align: left;
-    font-family: 'Brygada 1918', serif;
-    font-family: 'Simonetta', cursive;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -170,12 +168,12 @@ h3 {
 }
 
 .entry {
-    margin-top: 50px;
+    
 }
 
 .entry__title {
     display: inline;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 a {
@@ -224,6 +222,11 @@ pre {
   
 p {
     width: 100%;
+}
+
+.headline {
+    margin: 10px 100px 10px 10px;
+    width: 50%;
 }
 
 img {
