@@ -46,7 +46,7 @@ def create_app():
         title = StringField('Title')
         date = StringField('date', default=datetime.datetime.today().strftime("%Y-%m-%d"))      
 
-        categories = ['Films', 'Books', 'Music', 'Memos']
+        categories = ['Films', 'Books', 'Music']
         category = SelectField(label='State', choices=categories)
 
         content = CKEditorField('Body', validators=[DataRequired()])
@@ -154,7 +154,35 @@ def create_app():
     @app.route('/flask_admin')
     def index():
         return '<a href="/admin/">Go to Admin!</a>'
-    
+
+
+    @app.route('/films')
+    def film_posts():
+        entries_with_date = [
+                ( entry['title'], entry['content'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
+                for entry in app.db.posts.find({"category":'Films' })
+                ]
+        return render_template('film_posts.html', entries=entries_with_date)
+
+    @app.route('/music')
+    def music_posts():
+        entries_with_date = [
+                ( entry['title'], entry['content'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
+                for entry in app.db.posts.find({"category":'Music' })
+                ]
+        print(app.db.posts.find({"category":'Music'}))
+        print(entries_with_date)
+        return render_template('music_posts.html', entries=entries_with_date)
+
+    @app.route('/books')
+    def book_posts():
+        entries_with_date = [
+                ( entry['title'], entry['content'], datetime.datetime.strptime(entry['date'], "%Y-%m-%d").strftime("%b %d") )
+                for entry in app.db.posts.find({"category":'Books' })
+                ]
+        return render_template('book_posts.html', entries=entries_with_date)
+
+
     return app
 
 '''

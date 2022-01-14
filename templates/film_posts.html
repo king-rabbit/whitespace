@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="main">
+  <section>
+    <h2>Recent posts</h2>
+    {% for entry in entries %}
+    <article class="entry">
+      <div>
+        <h3 class="entry__title"><a href="{{url_for('individual_post', post_title=entry[0])}}">{{entry[0]}}</a></h3>
+        <time class="entry__date" datetime="{{ entry[2] }}"> {{ entry[2] }}</time>
+       </div>
+    </article>
+    {% endfor %}
+   </section>
+
+</main>
+{% endblock %}
