@@ -40,7 +40,7 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     font-size: 24px;
-    background: #fff;
+    background: #95c7c1;
 }
 
 .navbar__brand {
@@ -151,7 +151,7 @@ h1 {
 
 h2 {
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 25px;
     width: 100%;
     display:block;
     text-align: left;
@@ -172,9 +172,7 @@ h3 {
     padding: 30px 200px 200px;
 }
 
-.entry {
-    
-}
+
 
 .entry__title {
     display: inline;
@@ -204,16 +202,16 @@ pre {
 
 .post {
     width: 800px;
-    margin: 10px auto;
+    margin: 50px auto;
   }
   
   .post__title {
-    font-size: 20px;
+    font-size: 35px;
     text-align: center;
   }
   
   .post__date {
-    font-size: 15px;
+    font-size: 20px;
     text-align:right;
   }
   
@@ -256,7 +254,6 @@ img {
     background-color: #323f43;
     padding: 40px 0;
     margin: 50px 0 0 0;
-    border-top: 4px solid black;
     color: white;
     font-size: 12px;
 }

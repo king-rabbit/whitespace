@@ -4,8 +4,10 @@
     <main class=main>
       <article class="post">
         {% for post in post_data %}
-            <h1 class="post__title">{{post[0]}}</h1>
+            <div>
+              <h1 class="post__title">{{post[0]}}</h1>
             <p class="post__date">{{post[1]}}</p>
+          </div>
           {% endfor %}
 
           {% for text in post_content %}
