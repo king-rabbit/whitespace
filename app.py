@@ -25,33 +25,29 @@ def create_app():
     entries = []
 
     app.config['CKEDITOR_SERVE_LOCAL'] = True
+    app.config['CKEDITOR_PKG_TYPE'] = 'full'
     app.config['CKEDITOR_HEIGHT'] = 400
     app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'  # this value can be endpoint or url
     app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads')
     app.config['CKEDITOR_ENABLE_CSRF'] = True
+
 
     app.secret_key = 'secret string'
 
     ckeditor.init_app(app)
     csrf = CSRFProtect(app) 
 
-
     class PostForm(FlaskForm):
         title = StringField('Title')
         body = CKEditorField('Body', validators=[DataRequired()])
         submit = SubmitField()
         
-        
     class Post(FlaskForm):
         title = StringField('Title')
         date = StringField('date', default=datetime.datetime.today().strftime("%Y-%m-%d"))      
-
         categories = ['Films', 'Books', 'Music']
         category = SelectField(label='State', choices=categories)
-
         content = CKEditorField('Body', validators=[DataRequired()])
-        
-
         
     class PostAdmin(ModelView):
         column_list = ('title', 'date', 'category', 'content')
@@ -86,7 +82,6 @@ def create_app():
              formatted_date = datetime.datetime.today().strftime("%Y-%m-%d")
 
              app.db.posts.insert_one({"title":entry_title, "content":entry_content, "date":formatted_date})
-             
 
         return render_template("write_post.html", form=form) 
 
@@ -96,6 +91,7 @@ def create_app():
     def uploaded_files(filename):
         path = app.config['UPLOADED_PATH']
         return send_from_directory(path, filename)
+
 
     @app.route('/upload', methods=['POST'])
     def upload():
@@ -135,6 +131,7 @@ def create_app():
                 ]
 
         return render_template("posts_list.html", posts=posts)
+
 
     @app.route("/admin/post/<string:post_title>",  methods=['GET', 'POST'])
     def admin_post_edit(post_title):
