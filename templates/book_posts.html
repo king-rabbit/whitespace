@@ -5,7 +5,7 @@
     <h2>Recent posts</h2>
     {% for entry in entries %}
     <article class="entry">
-      <div>
+      <div style="text-align: center">
         <h3 class="entry__title"><a href="{{url_for('individual_post', post_title=entry[0])}}">{{entry[0]}}</a></h3>
         <time class="entry__date" datetime="{{ entry[2] }}"> {{ entry[2] }}</time>
        </div>
